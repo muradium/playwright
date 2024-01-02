@@ -296,6 +296,19 @@ export type FormField = {
   },
 };
 
+export type PfxObject = {
+  buf: Binary,
+  passphrase?: string,
+};
+
+export type CertificateOptions = {
+  ca?: Binary[],
+  cert?: Binary[],
+  key?: Binary[],
+  passphrase?: string,
+  pfx?: PfxObject[],
+};
+
 // ----------- APIRequestContext -----------
 export type APIRequestContextInitializer = {
   tracing: TracingChannel,
@@ -324,6 +337,7 @@ export type APIRequestContextFetchParams = {
   failOnStatusCode?: boolean,
   ignoreHTTPSErrors?: boolean,
   maxRedirects?: number,
+  certificateOptions?: CertificateOptions,
 };
 export type APIRequestContextFetchOptions = {
   params?: NameValue[],
@@ -337,6 +351,7 @@ export type APIRequestContextFetchOptions = {
   failOnStatusCode?: boolean,
   ignoreHTTPSErrors?: boolean,
   maxRedirects?: number,
+  certificateOptions?: CertificateOptions,
 };
 export type APIRequestContextFetchResult = {
   response: APIResponse,

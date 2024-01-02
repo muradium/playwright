@@ -166,6 +166,17 @@ scheme.FormField = tObject({
     buffer: tBinary,
   })),
 });
+scheme.PfxObject = tObject({
+  buf: tBinary,
+  passphrase: tOptional(tString),
+});
+scheme.CertificateOptions = tObject({
+  ca: tOptional(tArray(tBinary)),
+  cert: tOptional(tArray(tBinary)),
+  key: tOptional(tArray(tBinary)),
+  passphrase: tOptional(tString),
+  pfx: tOptional(tArray(tType('PfxObject'))),
+});
 scheme.APIRequestContextInitializer = tObject({
   tracing: tChannel(['Tracing']),
 });
@@ -182,6 +193,7 @@ scheme.APIRequestContextFetchParams = tObject({
   failOnStatusCode: tOptional(tBoolean),
   ignoreHTTPSErrors: tOptional(tBoolean),
   maxRedirects: tOptional(tNumber),
+  certificateOptions: tOptional(tType('CertificateOptions')),
 });
 scheme.APIRequestContextFetchResult = tObject({
   response: tType('APIResponse'),

@@ -29,6 +29,7 @@ import type { FilePayload, Headers, StorageState } from './types';
 import type { Playwright } from './playwright';
 import { Tracing } from './tracing';
 import { isTargetClosedError } from './errors';
+import { KeyObject, PxfObject } from 'tls';
 
 export type FetchOptions = {
   params?: { [key: string]: string; },
@@ -41,6 +42,15 @@ export type FetchOptions = {
   failOnStatusCode?: boolean,
   ignoreHTTPSErrors?: boolean,
   maxRedirects?: number,
+  certificateOptions?: CertificateOptions
+};
+
+export type CertificateOptions = {
+  ca?: string | Buffer | Array<string | Buffer> | undefined;
+  cert?: string | Buffer | Array<string | Buffer> | undefined;
+  key?: string | Buffer | Array<string | Buffer | KeyObject> | undefined;
+  passphrase?: string | undefined;
+  pfx?: string | Buffer | Array<string | Buffer | PxfObject> | undefined;
 };
 
 type NewContextOptions = Omit<channels.PlaywrightNewRequestOptions, 'extraHTTPHeaders' | 'storageState' | 'tracesDir'> & {
@@ -169,6 +179,7 @@ export class APIRequestContext extends ChannelOwner<channels.APIRequestContextCh
       let formData: channels.NameValue[] | undefined;
       let multipartData: channels.FormField[] | undefined;
       let postDataBuffer: Buffer | undefined;
+      let certificateOptions: channels.CertificateOptions | undefined;
       if (options.data !== undefined) {
         if (isString(options.data)) {
           if (isJsonContentType(headers))
@@ -205,6 +216,14 @@ export class APIRequestContext extends ChannelOwner<channels.APIRequestContextCh
       const fixtures = {
         __testHookLookup: (options as any).__testHookLookup
       };
+      if (options.certificateOptions) {
+        certificateOptions = {
+          ca: parseCertificate(options.certificateOptions.ca),
+          cert: parseCertificate(options.certificateOptions.cert),
+          key: parseCertificate(options.certificateOptions.key),
+          passphrase: options.certificateOptions.passphrase,
+        };
+      }
       const result = await this._channel.fetch({
         url,
         params,
@@ -218,6 +237,7 @@ export class APIRequestContext extends ChannelOwner<channels.APIRequestContextCh
         failOnStatusCode: options.failOnStatusCode,
         ignoreHTTPSErrors: options.ignoreHTTPSErrors,
         maxRedirects: maxRedirects,
+        certificateOptions: certificateOptions,
         ...fixtures
       });
       return new APIResponse(this, result.response);
@@ -246,6 +266,26 @@ function isJsonParsable(value: any) {
     else
       throw e;
   }
+}
+
+function parseCertificate(certificate: string | Buffer | Array<string | Buffer | KeyObject> | undefined): Buffer[] | undefined {
+  if (Array.isArray(certificate)) {
+
+    return certificate.map((item): Buffer => {
+      if (isString(item)) {
+        return Buffer.from(item, 'utf8');
+      } else if (Buffer.isBuffer(item)) {
+        return item;
+      } else {
+        return Buffer.from('', 'utf8')
+      }
+    });
+  } else if (isString(certificate)) {
+    return [Buffer.from(certificate, 'utf8')];
+  } else if (Buffer.isBuffer(certificate)) {
+    return [certificate];
+  }
+  return certificate;
 }
 
 export class APIResponse implements api.APIResponse {

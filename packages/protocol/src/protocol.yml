@@ -269,6 +269,29 @@ FormField:
         mimeType: string?
         buffer: binary
 
+PfxObject:
+  type: object
+  properties:
+    buf: binary
+    passphrase: string?
+
+CertificateOptions:
+  type: object
+  properties:
+    ca:
+      type: array?
+      items: binary
+    cert:
+      type: array?
+      items: binary
+    key:
+      type: array?
+      items: binary
+    passphrase: string?
+    pfx:
+      type: array?
+      items: PfxObject
+
 APIRequestContext:
   type: interface
 
@@ -299,6 +322,7 @@ APIRequestContext:
         failOnStatusCode: boolean?
         ignoreHTTPSErrors: boolean?
         maxRedirects: number?
+        certificateOptions: CertificateOptions?
       returns:
         response: APIResponse
 

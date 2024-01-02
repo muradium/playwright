@@ -40,6 +40,7 @@ import { Tracing } from './trace/recorder/tracing';
 import type * as types from './types';
 import type { HeadersArray, ProxySettings } from './types';
 import { kMaxCookieExpiresDateInSeconds } from './network';
+import * as tls from 'tls';
 
 type FetchRequestOptions = {
   userAgent: string;
@@ -160,7 +161,7 @@ export abstract class APIRequestContext extends SdkObject {
 
     const method = params.method?.toUpperCase() || 'GET';
     const proxy = defaults.proxy;
-    let agent;
+    let agent = undefined;
     if (proxy && proxy.server !== 'per-context' && !shouldBypassProxy(requestUrl, proxy.bypass)) {
       const proxyOpts = url.parse(proxy.server);
       if (proxyOpts.protocol?.startsWith('socks')) {
@@ -174,6 +175,22 @@ export abstract class APIRequestContext extends SdkObject {
         // TODO: We should use HttpProxyAgent conditional on proxyOpts.protocol instead of always using CONNECT method.
         agent = new HttpsProxyAgent(proxyOpts);
       }
+    }
+
+    if (params.certificateOptions) {
+      if (!agent) {
+        agent = new https.Agent();
+      }
+      const certificateOptions = params.certificateOptions;
+      agent.options = {
+        ca: certificateOptions.ca,
+        cert: certificateOptions.cert,
+        key: certificateOptions.key,
+        passphrase: certificateOptions.passphrase,
+        pfx: certificateOptions.pfx
+      };
+
+      console.log('Certificates added: ' + certificateOptions);
     }
 
     const timeout = defaults.timeoutSettings.timeout(params);

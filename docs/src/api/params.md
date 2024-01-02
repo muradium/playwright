@@ -447,6 +447,21 @@ Whether to ignore HTTPS errors when sending network requests. Defaults to `false
 Maximum number of request redirects that will be followed automatically. An error will be thrown if the number is exceeded.
 Defaults to `20`. Pass `0` to not follow redirects.
 
+## js-python-fetch-option-certificateoptions
+* langs: js, python
+- `certificateOptions` <[Object]>
+  - `ca` <[string]|[Buffer]|[Array]<[string]|[Buffer]>>
+  - `cert` <[string]|[Buffer]|[Array]<[string]|[Buffer]>>
+  - `key` <[string]|[Buffer]|[Array]<[string]|[Buffer]|[Object]>>
+    - `pem` <[string]|[Buffer]>
+    - `passphrase` <[string]>
+  - `passphrase` <[string]>
+  - `pfx` <[string]|[Buffer]|[Array]<[string]|[Buffer]>|[Object]>
+    - `buf` <[string]|[Buffer]>
+    - `passphrase` <[string]>
+
+Client certificates used for requests over SSL/TLS connections.
+
 ## evaluate-expression
 - `expression` <[string]>
 
