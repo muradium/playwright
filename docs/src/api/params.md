@@ -449,14 +449,14 @@ Defaults to `20`. Pass `0` to not follow redirects.
 
 ## js-python-fetch-option-certificateoptions
 * langs: js, python
-- `certificateOptions` <[Object]>
-  - `ca` <[string]|[Buffer]|[Array]<[string]|[Buffer]>>
-  - `cert` <[string]|[Buffer]|[Array]<[string]|[Buffer]>>
-  - `key` <[string]|[Buffer]|[Array]<[string]|[Buffer]|[Object]>>
+- `certificateOptions` ?<[Object]>
+  - `ca` ?<[string]|[Buffer]|[Array]<[string]|[Buffer]>>
+  - `cert` ?<[string]|[Buffer]|[Array]<[string]|[Buffer]>>
+  - `key` ?<[string]|[Buffer]|[Array]<[string]|[Buffer]|[Object]>>
     - `pem` <[string]|[Buffer]>
     - `passphrase` <[string]>
-  - `passphrase` <[string]>
-  - `pfx` <[string]|[Buffer]|[Array]<[string]|[Buffer]>|[Object]>
+  - `passphrase` ?<[string]>
+  - `pfx` ?<[string]|[Buffer]|[Array]<[string]|[Buffer]>|[Object]>
     - `buf` <[string]|[Buffer]>
     - `passphrase` <[string]>
 

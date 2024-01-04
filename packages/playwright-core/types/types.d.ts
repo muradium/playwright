@@ -15417,6 +15417,29 @@ export interface APIRequestContext {
    */
   delete(url: string, options?: {
     /**
+     * Client certificates used for requests over SSL/TLS connections.
+     */
+    certificateOptions?: {
+      ca?: string|Buffer|Array<string|Buffer>;
+
+      cert?: string|Buffer|Array<string|Buffer>;
+
+      key?: string|Buffer|Array<string|Buffer|{
+        pem: string|Buffer;
+
+        passphrase: string;
+      }>;
+
+      passphrase?: string;
+
+      pfx?: string|Buffer|Array<string|Buffer>|{
+        buf: string|Buffer;
+
+        passphrase: string;
+      };
+    };
+
+    /**
      * Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string
      * and `content-type` header will be set to `application/json` if not explicitly set. Otherwise the `content-type`
      * header will be set to `application/octet-stream` if not explicitly set.
@@ -15545,6 +15568,29 @@ export interface APIRequestContext {
    */
   fetch(urlOrRequest: string|Request, options?: {
     /**
+     * Client certificates used for requests over SSL/TLS connections.
+     */
+    certificateOptions?: {
+      ca?: string|Buffer|Array<string|Buffer>;
+
+      cert?: string|Buffer|Array<string|Buffer>;
+
+      key?: string|Buffer|Array<string|Buffer|{
+        pem: string|Buffer;
+
+        passphrase: string;
+      }>;
+
+      passphrase?: string;
+
+      pfx?: string|Buffer|Array<string|Buffer>|{
+        buf: string|Buffer;
+
+        passphrase: string;
+      };
+    };
+
+    /**
      * Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string
      * and `content-type` header will be set to `application/json` if not explicitly set. Otherwise the `content-type`
      * header will be set to `application/octet-stream` if not explicitly set.
@@ -15645,6 +15691,29 @@ export interface APIRequestContext {
    */
   get(url: string, options?: {
     /**
+     * Client certificates used for requests over SSL/TLS connections.
+     */
+    certificateOptions?: {
+      ca?: string|Buffer|Array<string|Buffer>;
+
+      cert?: string|Buffer|Array<string|Buffer>;
+
+      key?: string|Buffer|Array<string|Buffer|{
+        pem: string|Buffer;
+
+        passphrase: string;
+      }>;
+
+      passphrase?: string;
+
+      pfx?: string|Buffer|Array<string|Buffer>|{
+        buf: string|Buffer;
+
+        passphrase: string;
+      };
+    };
+
+    /**
      * Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string
      * and `content-type` header will be set to `application/json` if not explicitly set. Otherwise the `content-type`
      * header will be set to `application/octet-stream` if not explicitly set.
@@ -15725,6 +15794,29 @@ export interface APIRequestContext {
    */
   head(url: string, options?: {
     /**
+     * Client certificates used for requests over SSL/TLS connections.
+     */
+    certificateOptions?: {
+      ca?: string|Buffer|Array<string|Buffer>;
+
+      cert?: string|Buffer|Array<string|Buffer>;
+
+      key?: string|Buffer|Array<string|Buffer|{
+        pem: string|Buffer;
+
+        passphrase: string;
+      }>;
+
+      passphrase?: string;
+
+      pfx?: string|Buffer|Array<string|Buffer>|{
+        buf: string|Buffer;
+
+        passphrase: string;
+      };
+    };
+
+    /**
      * Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string
      * and `content-type` header will be set to `application/json` if not explicitly set. Otherwise the `content-type`
      * header will be set to `application/octet-stream` if not explicitly set.
@@ -15804,6 +15896,29 @@ export interface APIRequestContext {
    * @param options
    */
   patch(url: string, options?: {
+    /**
+     * Client certificates used for requests over SSL/TLS connections.
+     */
+    certificateOptions?: {
+      ca?: string|Buffer|Array<string|Buffer>;
+
+      cert?: string|Buffer|Array<string|Buffer>;
+
+      key?: string|Buffer|Array<string|Buffer|{
+        pem: string|Buffer;
+
+        passphrase: string;
+      }>;
+
+      passphrase?: string;
+
+      pfx?: string|Buffer|Array<string|Buffer>|{
+        buf: string|Buffer;
+
+        passphrase: string;
+      };
+    };
+
     /**
      * Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string
      * and `content-type` header will be set to `application/json` if not explicitly set. Otherwise the `content-type`
@@ -15936,6 +16051,29 @@ export interface APIRequestContext {
    */
   post(url: string, options?: {
     /**
+     * Client certificates used for requests over SSL/TLS connections.
+     */
+    certificateOptions?: {
+      ca?: string|Buffer|Array<string|Buffer>;
+
+      cert?: string|Buffer|Array<string|Buffer>;
+
+      key?: string|Buffer|Array<string|Buffer|{
+        pem: string|Buffer;
+
+        passphrase: string;
+      }>;
+
+      passphrase?: string;
+
+      pfx?: string|Buffer|Array<string|Buffer>|{
+        buf: string|Buffer;
+
+        passphrase: string;
+      };
+    };
+
+    /**
      * Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string
      * and `content-type` header will be set to `application/json` if not explicitly set. Otherwise the `content-type`
      * header will be set to `application/octet-stream` if not explicitly set.
@@ -16015,6 +16153,29 @@ export interface APIRequestContext {
    * @param options
    */
   put(url: string, options?: {
+    /**
+     * Client certificates used for requests over SSL/TLS connections.
+     */
+    certificateOptions?: {
+      ca?: string|Buffer|Array<string|Buffer>;
+
+      cert?: string|Buffer|Array<string|Buffer>;
+
+      key?: string|Buffer|Array<string|Buffer|{
+        pem: string|Buffer;
+
+        passphrase: string;
+      }>;
+
+      passphrase?: string;
+
+      pfx?: string|Buffer|Array<string|Buffer>|{
+        buf: string|Buffer;
+
+        passphrase: string;
+      };
+    };
+
     /**
      * Allows to set post data of the request. If the data parameter is an object, it will be serialized to json string
      * and `content-type` header will be set to `application/json` if not explicitly set. Otherwise the `content-type`
